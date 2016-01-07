@@ -19,6 +19,7 @@ form.submit(url, function (error, response) {
     throw error
   } else {
     console.log(response.statusCode)
+    console.log(response.statusMessage)
     response.pipe(file)
     file.on('finish', function () {
       console.log('written')
