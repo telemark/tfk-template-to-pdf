@@ -2,43 +2,59 @@
 
 var fs = require('fs')
 var FormData = require('form-data')
-var data = require('./test/data/data.json')
-var template = fs.createReadStream('test/data/template.docx')
-var file = fs.createWriteStream('test/data/document.pdf')
-// var templateServiceUrl = 'https://templater.service.t-fk.no'
-// var pdfServiceUrl = 'https://pdfconvert.service.t-fk.no'
-var templateServiceUrl = 'http://192.168.99.100'
-var pdfServiceUrl = 'http://192.168.99.100:3000'
-var templateForm = new FormData()
-var pdfForm = new FormData()
-var timeStart = new Date().getTime()
 
-Object.keys(data).forEach(function (key) {
-  templateForm.append(key, data[key])
-})
-
-templateForm.append('file', template)
-
-templateForm.submit(templateServiceUrl, function (error, response) {
-  if (error) {
-    throw error
-  } else {
-    console.log(response.statusCode)
-    console.log(response.statusMessage)
-    pdfForm.append('file', response)
-    pdfForm.submit(pdfServiceUrl, function (err, resp) {
-      if (err) {
-        throw err
-      } else {
-        console.log(resp.statusCode)
-        console.log(resp.statusMessage)
-        resp.pipe(file)
-        file.on('finish', function () {
-          var timeStop = new Date().getTime()
-          console.log('written')
-          console.log(timeStop - timeStart)
-        })
-      }
-    })
+function createPdfFromTemplate (options, callback) {
+  if (!options) {
+    return callback(new Error('Missing required input: options'), null)
   }
-})
+  if (!options.templateData) {
+    return callback(new Error('Missing required input: options.templateData'), null)
+  }
+  if (!options.templateFilepath) {
+    return callback(new Error('Missing required input: options.templateFilepath'), null)
+  }
+  if (!options.documentFilepath) {
+    return callback(new Error('Missing required input: options.documentFilepath'), null)
+  }
+  if (!options.templaterServiceUrl) {
+    return callback(new Error('Missing required input: options.templaterServiceUrl'), null)
+  }
+  if (!options.pdfServiceUrl) {
+    return callback(new Error('Missing required input: options.pdfServiceUrl'), null)
+  }
+
+  var data = options.templateData
+  var templaterForm = new FormData()
+  var pdfForm = new FormData()
+
+  Object.keys(data).forEach(function (key) {
+    templaterForm.append(key, data[key])
+  })
+
+  templaterForm.append('file', fs.createReadStream(options.templateFilepath))
+
+  templaterForm.submit(options.templaterServiceUrl, function (error, response) {
+    if (error) {
+      return callback(error, null)
+    } else if (response.statusCode !== 200) {
+      return callback(new Error('Unexpected statusCode from templaterService: ' + response.statusCode))
+    } else {
+      pdfForm.append('file', response)
+      pdfForm.submit(options.pdfServiceUrl, function (err, resp) {
+        if (err) {
+          return callback(err, null)
+        } else if (response.statusCode !== 200) {
+          return callback(new Error('Unexpected statusCode from pdfService: ' + response.statusCode))
+        } else {
+          var file = fs.createWriteStream(options.documentFilepath)
+          resp.pipe(file)
+          file.on('finish', function () {
+            return callback(null, {message: 'Document created'})
+          })
+        }
+      })
+    }
+  })
+}
+
+module.exports = createPdfFromTemplate
