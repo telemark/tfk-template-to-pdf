@@ -35,10 +35,22 @@ tap.test('requires options.templateFilepath to exist', function (test) {
   })
 })
 
+tap.test('requires options.templateFilepath to be valid', function (test) {
+  var options = {
+    templateData: true,
+    templateFilepath: '/none/existing/file/here.docx'
+  }
+  var expectedErrorMessage = 'options.templateFilepath is invalid'
+  createPdfFromTemplate(options, function (error, data) {
+    tap.equal(error.message, expectedErrorMessage, expectedErrorMessage)
+    test.done()
+  })
+})
+
 tap.test('requires options.documentFilepath to exist', function (test) {
   var options = {
     templateData: true,
-    templateFilepath: true,
+    templateFilepath: 'test/data/template.docx',
     documentFilepath: false
   }
   var expectedErrorMessage = 'Missing required input: options.documentFilepath'
@@ -51,7 +63,7 @@ tap.test('requires options.documentFilepath to exist', function (test) {
 tap.test('requires options.templaterServiceUrl to exist', function (test) {
   var options = {
     templateData: true,
-    templateFilepath: true,
+    templateFilepath: 'test/data/template.docx',
     documentFilepath: true,
     templaterServiceUrl: false
   }
@@ -65,7 +77,7 @@ tap.test('requires options.templaterServiceUrl to exist', function (test) {
 tap.test('requires options.pdfServiceUrl to exist', function (test) {
   var options = {
     templateData: true,
-    templateFilepath: true,
+    templateFilepath: 'test/data/template.docx',
     documentFilepath: true,
     templaterServiceUrl: true,
     pdfServiceUrl: false
