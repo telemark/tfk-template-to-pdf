@@ -2,7 +2,7 @@
 
 var fs = require('fs')
 var FormData = require('form-data')
-var fileExists = require('file-exists')
+var isFile = require('file-exists')
 
 function createPdfFromTemplate (options, callback) {
   if (!options) {
@@ -14,7 +14,7 @@ function createPdfFromTemplate (options, callback) {
   if (!options.templateFilepath) {
     return callback(new Error('Missing required input: options.templateFilepath'), null)
   }
-  if (!fileExists(options.templateFilepath)) {
+  if (!isFile(options.templateFilepath)) {
     return callback(new Error('options.templateFilepath is invalid'), null)
   }
   if (!options.documentFilepath) {
