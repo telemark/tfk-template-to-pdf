@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "file-exists": "^1.0.0",
-    "form-data": "^1.0.0-rc3"
+    "form-data": "git+https://github.com/telemark/form-data.git"
   }
 }
