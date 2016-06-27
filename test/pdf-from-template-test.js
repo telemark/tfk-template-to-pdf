@@ -1,7 +1,7 @@
 'use strict'
 
-var tap = require('tap')
-var createPdfFromTemplate = require('../index')
+const tap = require('tap')
+const createPdfFromTemplate = require('../index')
 
 tap.test('requires an options object', function (test) {
   var options = false
@@ -60,31 +60,32 @@ tap.test('requires options.documentFilepath to exist', function (test) {
   })
 })
 
-tap.test('requires options.templaterServiceUrl to exist', function (test) {
+tap.test('requires options.pdfServiceUrl to exist', function (test) {
   var options = {
     templateData: true,
     templateFilepath: 'test/data/template.docx',
     documentFilepath: true,
-    templaterServiceUrl: false
+    pdfServiceUrl: false
   }
-  var expectedErrorMessage = 'Missing required input: options.templaterServiceUrl'
+  var expectedErrorMessage = 'Missing required input: options.pdfServiceUrl'
   createPdfFromTemplate(options, function (error, data) {
     tap.equal(error.message, expectedErrorMessage, expectedErrorMessage)
     test.done()
   })
 })
 
-tap.test('requires options.pdfServiceUrl to exist', function (test) {
-  var options = {
-    templateData: true,
+tap.test('It converts template and data to pdf', function (test) {
+  const options = {
+    templateData: require('./data/templatedata.json'),
     templateFilepath: 'test/data/template.docx',
-    documentFilepath: true,
-    templaterServiceUrl: true,
-    pdfServiceUrl: false
+    documentFilepath: 'test/data/template.pdf',
+    pdfServiceUrl: 'https://pdftemplater.service.t-fk.no'
   }
-  var expectedErrorMessage = 'Missing required input: options.pdfServiceUrl'
   createPdfFromTemplate(options, function (error, data) {
-    tap.equal(error.message, expectedErrorMessage, expectedErrorMessage)
+    if (error) {
+      throw error
+    }
+    tap.ok(data, 'It converts as expected')
     test.done()
   })
 })
