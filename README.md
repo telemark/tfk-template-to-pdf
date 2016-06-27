@@ -1,8 +1,8 @@
 [![Build Status](https://travis-ci.org/telemark/tfk-template-to-pdf.svg?branch=master)](https://travis-ci.org/telemark/tfk-template-to-pdf)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 # tfk-template-to-pdf
-This is a convenience module for creating pdf documents from templates by using services 
-like [docxtemplater-webservice-docker](https://github.com/telemark/docxtemplater-webservice-docker) and [converttopdf-webservice-docker](https://github.com/telemark/converttopdf-webservice-docker)
+This is a convenience module for creating pdf documents from templates by using a service
+like [pdftemplater-webservice-docker](https://github.com/telemark/pdftemplater-webservice-docker)
 
 ## Installation
 
@@ -31,7 +31,6 @@ Pass in an options object.
 **templateData** key:value for data to render with template
 **templateFilepath**: path to .docx template
 **documentFilepath**: where to save the rendered document
-**templaterServiceUrl**: URL to templaterservice
 **pdfServiceUrl**: URL to pdf converter service
 
 ```javascript
@@ -46,7 +45,6 @@ var options = {
   },
   templateFilepath: 'test/data/template.docx',
   documentFilepath: 'test/data/document.pdf',
-  templaterServiceUrl: 'http://192.168.99.100',
   pdfServiceUrl: 'http://192.168.99.100:3000'
 }
 
