@@ -1,7 +1,7 @@
 {
   "name": "tfk-template-to-pdf",
   "description": "Create pdf document from template",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "MIT",
   "author": {
     "name": "Geir Gåsodden",
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/telemark/tfk-template-to-pdf",
   "engines": {
-    "node": ">=4.5.0"
+    "node": ">=4.6.1"
   },
   "main": "index.js",
   "scripts": {
