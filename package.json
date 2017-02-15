@@ -1,7 +1,7 @@
 {
   "name": "tfk-template-to-pdf",
   "description": "Create pdf document from template",
-  "version": "2.0.7",
+  "version": "2.0.9",
   "license": "MIT",
   "author": {
     "name": "Geir Gåsodden",
@@ -36,9 +36,9 @@
   },
   "devDependencies": {
     "coveralls": "2.11.16",
-    "nsp": "2.6.1",
+    "nsp": "2.6.2",
     "standard": "8.6.0",
-    "tap": "10.0.0"
+    "tap": "10.1.0"
   },
   "dependencies": {
     "file-exists": "2.0.0",
