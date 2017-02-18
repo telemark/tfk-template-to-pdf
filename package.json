@@ -41,7 +41,7 @@
     "tap": "10.1.0"
   },
   "dependencies": {
-    "file-exists": "2.0.0",
+    "file-exists": "3.0.1",
     "form-data": "git+https://github.com/telemark/form-data.git"
   }
 }
