@@ -38,7 +38,7 @@
     "standard": "10.0.0",
     "coveralls": "2.13.0",
     "nsp": "2.6.3",
-    "tap": "10.3.1"
+    "tap": "10.3.2"
   },
   "dependencies": {
     "file-exists": "3.0.2",
