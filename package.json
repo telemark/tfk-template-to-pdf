@@ -37,8 +37,8 @@
   "devDependencies": {
     "standard": "10.0.2",
     "coveralls": "2.13.1",
+    "tap": "10.6.0"
     "nsp": "2.7.0",
-    "tap": "10.5.2"
   },
   "dependencies": {
     "file-exists": "4.0.0",
