@@ -3,10 +3,10 @@
 const tap = require('tap')
 const createPdfFromTemplate = require('../index')
 
-tap.test('requires an options object', function (test) {
-  var options = false
-  var expectedErrorMessage = 'Missing required input: options'
-  createPdfFromTemplate(options, function (error, data) {
+tap.test('requires an options object', test => {
+  const options = false
+  const expectedErrorMessage = 'Missing required input: options'
+  createPdfFromTemplate(options, (error, data) => {
     tap.equal(error.message, expectedErrorMessage, expectedErrorMessage)
     test.done()
   })

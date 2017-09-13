@@ -1,7 +1,7 @@
 {
   "name": "tfk-template-to-pdf",
   "description": "Create pdf document from template",
-  "version": "2.0.18",
+  "version": "3.0.0",
   "license": "MIT",
   "author": {
     "name": "Geir Gåsodden",
@@ -17,31 +17,31 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/telemark/tfk-template-to-pdf.git"
+    "url": "https://github.com/telemark/tfk-template-to-pdf.git"
   },
   "bugs": {
-    "url": "http://github.com/telemark/tfk-template-to-pdf/issues"
+    "url": "https://github.com/telemark/tfk-template-to-pdf/issues"
   },
   "homepage": "https://github.com/telemark/tfk-template-to-pdf",
   "engines": {
-    "node": ">=4.6.2"
+    "node": ">=8.5.0"
   },
   "main": "index.js",
   "scripts": {
     "test": "standard && nsp check && tap --reporter=spec test/*.js",
     "coverage": "tap test/*.js --coverage",
     "coveralls": "tap --cov --coverage-report=lcov test/*.js && cat coverage/lcov.info | coveralls",
-    "setup": "npm install && node setup.js",
+    "setup": "npm install",
     "standard-fix": "standard --fix"
   },
   "devDependencies": {
-    "standard": "10.0.2",
     "coveralls": "2.13.1",
-    "tap": "10.6.0"
-    "nsp": "2.7.0",
+    "nsp": "2.8.0",
+    "standard": "10.0.3",
+    "tap": "10.7.2"
   },
   "dependencies": {
     "file-exists": "4.0.0",
-    "form-data": "git+https://github.com/telemark/form-data.git"
+    "form-data": "2.3.1"
   }
 }

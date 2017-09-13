@@ -4,7 +4,7 @@ const fs = require('fs')
 const FormData = require('form-data')
 const isFile = require('file-exists')
 
-module.exports = function createPdfFromTemplate (options, callback) {
+module.exports = (options, callback) => {
   if (!options) {
     return callback(new Error('Missing required input: options'), null)
   }
@@ -14,7 +14,7 @@ module.exports = function createPdfFromTemplate (options, callback) {
   if (!options.templateFilepath) {
     return callback(new Error('Missing required input: options.templateFilepath'), null)
   }
-  if (!isFile(options.templateFilepath)) {
+  if (!isFile.sync(options.templateFilepath)) {
     return callback(new Error('options.templateFilepath is invalid'), null)
   }
   if (!options.documentFilepath) {
@@ -25,7 +25,7 @@ module.exports = function createPdfFromTemplate (options, callback) {
   }
 
   const data = options.templateData
-  var pdfForm = new FormData()
+  let pdfForm = new FormData()
 
   Object.keys(data).forEach(function (key) {
     pdfForm.append(key, data[key])
@@ -33,13 +33,13 @@ module.exports = function createPdfFromTemplate (options, callback) {
 
   pdfForm.append('file', fs.createReadStream(options.templateFilepath))
 
-  pdfForm.submit(options.pdfServiceUrl, function (error, response) {
+  pdfForm.submit(options.pdfServiceUrl, (error, response) => {
     if (error) {
       return callback(error, null)
     } else if (response.statusCode !== 200) {
       return callback(new Error('Unexpected statusCode from pdfService: ' + response.statusCode))
     } else {
-      var file = fs.createWriteStream(options.documentFilepath)
+      let file = fs.createWriteStream(options.documentFilepath)
       response.pipe(file)
       file.on('finish', function () {
         return callback(null, {message: 'Document created'})
