@@ -41,7 +41,7 @@
     "tap": "10.7.2"
   },
   "dependencies": {
-    "file-exists": "4.0.0",
+    "file-exists": "5.0.0",
     "form-data": "2.3.1"
   }
 }
