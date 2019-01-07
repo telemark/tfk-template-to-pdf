@@ -1,6 +1,4 @@
-'use strict'
-
-const fs = require('fs')
+const { createReadStream } = require('fs')
 const FormData = require('form-data')
 const isFile = require('file-exists')
 
@@ -31,7 +29,7 @@ module.exports = (options, callback) => {
     pdfForm.append(key, data[key])
   })
 
-  pdfForm.append('file', fs.createReadStream(options.templateFilepath))
+  pdfForm.append('file', createReadStream(options.templateFilepath))
 
   pdfForm.submit(options.pdfServiceUrl, (error, response) => {
     if (error) {
@@ -39,7 +37,7 @@ module.exports = (options, callback) => {
     } else if (response.statusCode !== 200) {
       return callback(new Error('Unexpected statusCode from pdfService: ' + response.statusCode))
     } else {
-      let file = fs.createWriteStream(options.documentFilepath)
+      let file = createWriteStream(options.documentFilepath)
       response.pipe(file)
       file.on('finish', function () {
         return callback(null, {message: 'Document created'})
