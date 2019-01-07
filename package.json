@@ -17,14 +17,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/telemark/tfk-template-to-pdf.git"
+    "url": "git+https://github.com/telemark/tfk-template-to-pdf.git"
   },
   "bugs": {
     "url": "https://github.com/telemark/tfk-template-to-pdf/issues"
   },
   "homepage": "https://github.com/telemark/tfk-template-to-pdf",
   "engines": {
-    "node": ">=8.5.0"
+    "node": ">=10.15.0"
   },
   "main": "index.js",
   "scripts": {
