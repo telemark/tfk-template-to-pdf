@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/telemark/tfk-template-to-pdf.svg?branch=master)](https://travis-ci.org/telemark/tfk-template-to-pdf)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
-[![Greenkeeper badge](https://badges.greenkeeper.io/telemark/tfk-template-to-pdf.svg)](https://greenkeeper.io/)
 
 # tfk-template-to-pdf
 
@@ -36,9 +35,7 @@ Pass in an options object.
 **documentFilepath**: where to save the rendered document
 **pdfServiceUrl**: URL to pdf converter service
 
-```javascript
-'use strict'
-
+```JavaScript
 const createPdfFromTemplate = require('tfk-template-to-pdf')
 const options = {
   templateData: {
@@ -64,4 +61,3 @@ createPdfFromTemplate(options, (error, data) => {
 ## License
 
 [MIT](LICENSE)
-![Robohash image of tfk-template-to-pdf](https://robots.kebabstudios.party/tfk-template-to-pdf.png "Robohash image of tfk-template-to-pdf")
