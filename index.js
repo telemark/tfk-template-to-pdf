@@ -1,4 +1,4 @@
-const { createReadStream } = require('fs')
+const { createReadStream, createWriteStream } = require('fs')
 const FormData = require('form-data')
 const isFile = require('file-exists')
 
@@ -40,7 +40,7 @@ module.exports = (options, callback) => {
       let file = createWriteStream(options.documentFilepath)
       response.pipe(file)
       file.on('finish', function () {
-        return callback(null, {message: 'Document created'})
+        return callback(null, { message: 'Document created' })
       })
     }
   })
