@@ -41,6 +41,6 @@
   },
   "dependencies": {
     "file-exists": "5.0.1",
-    "form-data": "2.3.3"
+    "form-data": "2.5.1"
   }
 }
